@@ -14,16 +14,24 @@ module.exports.profile = (req,res)=>{
             }
         })
     } else{
-        return res.redirect('/users/sign-in')
+        return res.render('/users/sign-in')
     }
 }
 
 module.exports.signIn = (req,res)=>{
-    return res.render('user_sign_in')
+    if(req.cookies.user_id){
+        res.redirect('/users')
+    } else{
+        return res.render('user_sign_in')
+    }
 }
 
 module.exports.signUp = (req,res)=>{
-    return res.render('user_sign_up')
+    if(req.cookies.user_id){
+        res.redirect('/users')
+    } else{
+        return res.render('user_sign_up')
+    }
 }
 
 module.exports.create = (req,res)=>{
