@@ -1,1 +1,7 @@
-<h1>Achha</h1>
+<div class="container">
+<h5>Welcome, <%= user.name %> </h5>
+<br>
+<form action="/users/logout" method="POST">
+    <button class="waves-effect waves-light btn" type="submit"><i class="material-icons right">logout</i>Logout</button>
+</form>
+</div>
