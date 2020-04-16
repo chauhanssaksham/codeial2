@@ -1,5 +1,6 @@
 <div class="container" id='feed-posts'>
     <h4>Make a post</h4>
+    <% if (locals.user) { %>
     <div class="row">
         <div class="col s12">
         <form action="/posts/create" method="POST" id="new-post-form">
@@ -18,6 +19,7 @@
         </form>
         </div>
     </div>
+    <% } %>
     <div class="row">
         <div class="col s12 l10">
             <ul class="posts collection">
