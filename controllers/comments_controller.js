@@ -12,9 +12,11 @@ module.exports.create =  async (req,res) => {
             })
             post.comments.push(comment);
             post.save();
+            req.flash('success', "Comment created successfully")
             return res.redirect('/');
         }  
     } catch (error) {
+        req.flash('error', "Something went wrong")
         console.log("Error", error)
         return
     }
@@ -28,12 +30,15 @@ module.exports.destroy = async (req,res) => {
                 let post_id = comment.post;
                 comment.remove();
                 await Post.findByIdAndUpdate(post_id, {$pull: {comments: req.params.id}})
+                req.flash('success', "Comment deleted successfully")
                 return res.redirect('back');
             }
         } else {
+            req.flash('error', "Unable to locate the comment")
             return res.redirect('back');
         } 
     } catch (error) {
+        req.flash('error', "Something went wrong")
         console.log("Error", error)
         return
     }

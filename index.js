@@ -9,6 +9,8 @@ const MongoStore = require('connect-mongo')(session)
 const db = require('./config/mongoose')
 const path = require('path')
 const sassMiddleware = require('node-sass-middleware')
+const flash = require('connect-flash') //Stores the flash message in the session cookies, which is deleted on page refresh
+const flashMW = require('./config/flash')
 
 const PORT = 8000;
 
@@ -58,6 +60,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(passport.setAuthenticatedUser);
 
+app.use(flash())
+app.use(flashMW.setFlash)
 
 //Use express router
 app.use('/', require('./routes'))
