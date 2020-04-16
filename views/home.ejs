@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="input-field col s10 l9 xl8">
                     <i class="material-icons prefix">mode_edit</i>
-                    <textarea id="post-input" name="content" class="materialize-textarea"></textarea>
+                    <textarea id="post-input" name="content" class="materialize-textarea" required></textarea>
                     <label for="post-input">Post</label>
                 </div>
                 <div class="input-field col s2">
@@ -30,7 +30,7 @@
                         <form action="/comments/create" method="POST">
                             <div class="row">
                                 <div class="input-field col s10 m9">
-                                    <input id="comment-input" type="text" name="content"></input>
+                                    <input id="comment-input" type="text" name="content" required></input>
                                     <label for="comment-input">Comment</label>
                                     <input type="hidden" name="post" value="<%= post._id %>"></input>
                                 </div>
@@ -41,6 +41,20 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="row">
+                        <div class="col s11 offset-s1" id="post-comments-<%= post._id %> ">
+                            <% for( comment of post.comments ) { %>
+                                <div class="row">
+                                    <div class="col s5">
+                                        <b><%= comment.user.name %> </b>   
+                                    </div>
+                                    <div class="col s12">
+                                        <%= comment.content %> 
+                                    </div>
+                                </div>                 
+                            <% } %>
+                        </div>
+                        </div>
                     </li>
                 <% } %>
             </ul>
