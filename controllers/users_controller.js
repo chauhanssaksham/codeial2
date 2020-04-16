@@ -34,3 +34,10 @@ module.exports.create = (req,res)=>{
         }
     })
 }
+
+module.exports.createSession = (req,res) =>{
+    //Thanks to passport, the user is already signed in by this point
+    //Cookie has already been set
+    return res.redirect('/users');
+}
+
