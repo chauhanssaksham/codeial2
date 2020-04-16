@@ -1,5 +1,16 @@
 <div class="navbar-fixed">
     <nav>
-        Page Header
-    </nav>
+        <div class="nav-wrapper blue">
+          <a href="#!" class="brand-logo right">Codeial</a>
+          <ul class="left">
+            <% if (locals.user) { %>
+                <li><a href="/users"><i class="material-icons left">account_circle</i>Profile</a></li>
+                <li><a href="/users/logout"><i class="material-icons left">logout</i>Log out</a></li>
+            <% } else { %>
+                <li><a href="/users/sign-in"><i class="material-icons left">input</i>Sign In</a></li>
+                <li><a href="/users/sign-up"><i class="material-icons left">person_add</i>Sign Up</a></li>
+            <% } %> 
+          </ul>
+        </div>
+      </nav>
 </div>
