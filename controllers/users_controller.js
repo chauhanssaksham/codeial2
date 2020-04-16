@@ -34,3 +34,22 @@ module.exports.create = (req,res)=>{
         }
     })
 }
+
+module.exports.createSession = (req,res)=>{
+    User.findOne({email: req.body.email}, (err, user) => {
+        if (err) {
+            console.log("Error in logging in");
+            return;
+        }
+        if (user){
+            if (user.password != req.body.password){
+                return res.redirect('back');
+            }
+            res.cookie('user_id', user.id);
+            return res.redirect('/users');
+        } else {
+            console.log("User not found");
+            return res.redirect('back');
+        }
+    });
+}
