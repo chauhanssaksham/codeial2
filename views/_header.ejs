@@ -4,7 +4,7 @@
           <a href="/" class="brand-logo right">Codeial</a>
           <ul class="left">
             <% if (locals.user) { %>
-                <li><a href="/users"><i class="material-icons left">account_circle</i>Profile</a></li>
+                <li><a href="/users/profile/<%= locals.user.id %>"><i class="material-icons left">account_circle</i>Profile</a></li>
                 <li><a href="/users/logout"><i class="material-icons left">logout</i>Log out</a></li>
             <% } else { %>
                 <li><a href="/users/sign-in"><i class="material-icons left">input</i>Sign In</a></li>

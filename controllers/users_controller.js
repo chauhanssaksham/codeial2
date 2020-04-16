@@ -1,7 +1,11 @@
 const User = require('../models/user')
 
 module.exports.profile = (req,res)=>{
-    return res.render('user_profile')
+    User.findById(req.params.id, (err, user)=>{
+        return res.render('user_profile', {
+            profile_user: user
+        })
+    })
 }
 
 module.exports.signIn = (req,res)=>{
@@ -44,10 +48,11 @@ module.exports.create = (req,res)=>{
 module.exports.createSession = (req,res) =>{
     //Thanks to passport, the user is already signed in by this point
     //Cookie has already been set
-    return res.redirect('/users');
+    return res.redirect('/users/profile/' + req.user.id);
 }
 
 module.exports.destroySession = (req, res) => {
+    console.log('Loggin out.');
     req.logout();
-    return res.redirect('/');
+    return res.redirect('/users/sign-in');
 }

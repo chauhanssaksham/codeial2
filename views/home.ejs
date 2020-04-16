@@ -1,6 +1,20 @@
-<div class="container" id='feed-posts'>
-    <% if (locals.user) { %>
-        <%- include('_post_form') %> 
-    <% } %>
-    <%- include('_posts_section')  %> 
+<div class="row">
+    <div class="col s12 m8" id='feed-posts'>
+        <div class="row">
+        <div class="col s12 offset-l1">
+            <% if (locals.user) { %>
+                <%- include('_post_form') %> 
+            <% } %>
+            <%- include('_posts_section')  %> 
+        </div>
+    </div>
+    </div>
+    <ul class="col s12 m4">
+        <div class="collection with-header">
+            <li class="collection-header center"><h4>Friends</h4></li>
+            <% for( u of all_users ) { %>
+                <li><a href="/users/profile/<%= u.id %>" class="collection-item"><%= u.name %></a></li>
+            <% } %>
+          </div>
+    </ul>
 </div>
