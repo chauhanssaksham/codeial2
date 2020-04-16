@@ -1,18 +1,26 @@
 const User = require('../models/user')
 
-module.exports.profile = (req,res)=>{
-    User.findById(req.params.id, (err, user)=>{
+module.exports.profile = async (req,res)=>{
+    try {
+        let user = await User.findById(req.params.id)
         return res.render('user_profile', {
             profile_user: user
         })
-    })
+    } catch (error) {
+       console.log('Error', error);
+       return; 
+    }
 }
 
-module.exports.update = (req,res) => {
+module.exports.update = async (req,res) => {
     if (req.user.id == req.params.id){
-        User.findByIdAndUpdate(req.params.id, req.body, (err,user)=>{
+        try {
+            let user = await User.findByIdAndUpdate(req.params.id, req.body)
             return res.redirect('back');
-        });
+        } catch (error) {
+            console.log('error', error);
+            return;
+        }
     } else {
         return res.status(403).send('Unauthorized');
     }
@@ -32,27 +40,22 @@ module.exports.signUp = (req,res)=>{
     return res.render('user_sign_up')
 }
 
-module.exports.create = (req,res)=>{
-    if(req.body.password != req.body.confirm_password){
-        res.redirect('back')
-    }
-    User.findOne({email: req.body.email}, (err,user)=>{
-        if (err){
-            console.log("Error in Finding the user");
-            return;
+module.exports.create = async (req,res)=>{
+    try {
+        if(req.body.password != req.body.confirm_password){
+            return res.redirect('back')
         }
+        let user = await User.findOne({email: req.body.email})
         if (!user){
-            User.create(req.body, (err, user)=>{
-                if (err){
-                    console.log("Error in creating the user");
-                    return;
-                }
-                return res.redirect('/users/sign-in');
-            })
+            await User.create(req.body)
+            return res.redirect('/users/sign-in')
         } else{
             res.redirect('back')
         }
-    })
+    } catch (error) {
+        console.log("Error", error)
+        return
+    }
 }
 
 module.exports.createSession = (req,res) =>{
@@ -62,7 +65,6 @@ module.exports.createSession = (req,res) =>{
 }
 
 module.exports.destroySession = (req, res) => {
-    console.log('Loggin out.');
     req.logout();
     return res.redirect('/users/sign-in');
 }
