@@ -27,6 +27,20 @@
                     <li class="collection-item">
                         <h6><b><%= post.user.name %> </b></h6>
                         <p><%= post.content %> </p>
+                        <form action="/comments/create" method="POST">
+                            <div class="row">
+                                <div class="input-field col s10 m9">
+                                    <input id="comment-input" type="text" name="content"></input>
+                                    <label for="comment-input">Comment</label>
+                                    <input type="hidden" name="post" value="<%= post._id %>"></input>
+                                </div>
+                                <div class="input-field col s1">
+                                    <button class="btn btn-floating btn-medium waves-effect waves-light cyan" type="submit" name="action">
+                                        <i class="material-icons right">chevron_right</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </li>
                 <% } %>
             </ul>
