@@ -35,4 +35,21 @@ passport.use(new LocalStrategy({
     });
   });
 
+//Check if the user is authenticated:
+passport.checkAuthentication = function(req,res, next){
+    //if the user is signed in, pass on the control to the next function (controllers' action)
+    if(req.isAuthenticated()){
+        return next();
+    }
+    //if the user is not signed in
+    return res.redirect('/users/sign-in');
+}
+
+passport.setAuthenticatedUser = function(req,res, next){
+    if(req.isAuthenticated()){
+        res.locals.user = req.user;
+    }
+    next();
+}
+
   module.exports = passport;
