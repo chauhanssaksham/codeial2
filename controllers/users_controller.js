@@ -5,10 +5,16 @@ module.exports.profile = (req,res)=>{
 }
 
 module.exports.signIn = (req,res)=>{
+    if (req.isAuthenticated()){
+        return res.redirect('/users');
+    }
     return res.render('user_sign_in')
 }
 
 module.exports.signUp = (req,res)=>{
+    if (req.isAuthenticated()){
+        return res.redirect('/users');
+    }
     return res.render('user_sign_up')
 }
 
