@@ -1,1 +1,51 @@
-<h1>Hello</h1>
+<div class="container" id='feed-posts'>
+    <h4>Make a post</h4>
+    <div class="row">
+        <div class="col s12">
+        <form action="/posts/create" method="POST" id="new-post-form">
+            <div class="row">
+                <div class="input-field col s10 l9 xl8">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea id="post-input" name="content" class="materialize-textarea"></textarea>
+                    <label for="post-input">Post</label>
+                </div>
+                <div class="input-field col s2">
+                    <button class="btn waves-effect waves-light deep-orange" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        </div>
+    <div class="posts col s11 offset-s1 xl8 offset-xl1">
+        <div class="post row">
+            <h5>Username</h5>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi atque quod quasi? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum reprehenderit voluptatibus rem!</p>
+        </div>
+        <div class="post row">
+            <h5>Username</h5>
+            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum reprehenderit voluptatibus rem!</p>
+        </div>
+        <div class="post row">
+            <h5>Username</h5>
+            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum reprehenderit voluptatibus rem!</p>
+        </div>
+        <div class="post row">
+            <h5>Username</h5>
+            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum reprehenderit voluptatibus rem!</p>
+        </div>
+        <div class="post row">
+            <h5>Username</h5>
+            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum reprehenderit voluptatibus rem!</p>
+        </div>
+        <div class="post row">
+            <h5>Username</h5>
+            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum reprehenderit voluptatibus rem!</p>
+        </div>
+        <div class="post row">
+            <h5>Username</h5>
+            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum reprehenderit voluptatibus rem!</p>
+        </div>
+    </div>
+    </div>
+</div>
