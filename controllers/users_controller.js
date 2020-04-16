@@ -8,6 +8,16 @@ module.exports.profile = (req,res)=>{
     })
 }
 
+module.exports.update = (req,res) => {
+    if (req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id, req.body, (err,user)=>{
+            return res.redirect('back');
+        });
+    } else {
+        return res.status(403).send('Unauthorized');
+    }
+}
+
 module.exports.signIn = (req,res)=>{
     if (req.isAuthenticated()){
         return res.redirect('/users');

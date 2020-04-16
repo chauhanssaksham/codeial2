@@ -6,8 +6,8 @@ const passport = require('passport')
 router.get('/profile/:id' , usersController.profile)
 router.get('/sign-up', usersController.signUp)
 router.get('/sign-in', usersController.signIn)
-
 router.post('/create', usersController.create)
+router.post('/update/:id', passport.checkAuthentication, usersController.update)
 
 //Use passport as a middleware to authenticate
 router.post('/login', passport.authenticate(

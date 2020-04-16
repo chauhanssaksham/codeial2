@@ -1,4 +1,36 @@
 <div class="container">
-    <h5>Welcome, <%= profile_user.name %> </h5>
-    <h5>Email id: <%= profile_user.email %> </h5>
+    <h4>Profile Page</h4>
+    <% if (locals.user && locals.user.id == profile_user.id) { %>
+        <!-- if user matches, show the form -->
+        <form action="/users/update/<%= user.id %>" method="POST">
+            <div class="row">
+                <div class="col s8 m7 l6 xl5">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="Name" type="text" class="validate" name="name" placeholder="Your Name" value="<%= user.name %>" required>
+                            <label for="Name">Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">mail</i>
+                            <input id="Email" type="email" class="validate" name="email" placeholder="Your Email" value="<%= user.email %>" required>
+                            <label for="Email">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 right-align">
+                            <button class="btn waves-effect waves-light" type="submit">Submit
+                                <i class="material-icons right">edit</i>
+                              </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    <% } else { %>
+        <h5>Welcome, <%= profile_user.name %> </h5>
+        <h5>Email id: <%= profile_user.email %> </h5>
+    <% } %> 
 </div>
