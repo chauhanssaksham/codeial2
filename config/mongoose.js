@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect(`mongodb://localhost/codeial_development`, {useNewUrlParser:true, useUnifiedTopology:true})
+mongoose.connect(`mongodb://localhost/codeial2_development`, {useNewUrlParser:true, useUnifiedTopology:true})
 
 const db = mongoose.connection;
 
