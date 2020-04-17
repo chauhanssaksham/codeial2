@@ -14,5 +14,15 @@ if (process.env.NODE_ENV == 'production'){
 module.exports = {
     google_oauth_client_id: process.env.GOOGLE_OAUTH_CLIENT_ID,
     google_oauth_client_secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-    db_uri: process.env.DB_URI
+    db_uri: process.env.DB_URI,
+    smtp: {
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        auth: {
+            user: process.env.MAILER_GMAIL_USER,
+            pass: process.env.MAILER_GMAIL_PASS
+        }
+    }
 }
