@@ -1,6 +1,5 @@
 const Comment = require('../models/comment')
 const Post = require('../models/post')
-const User = require('../models/user')
 const commentMailer = require('../mailers/comments_mailer')
 
 module.exports.create =  async (req,res) => {
@@ -16,7 +15,7 @@ module.exports.create =  async (req,res) => {
             post.save();
 
             //Populate the comment to pass it into the comment mailer
-            comment.user = await User.findById(comment.user, 'name email')
+            comment = await Comment.findById(comment._id).populate({path:'user', select:'name email'})
             commentMailer.newComment(comment)
 
             req.flash('success', "Comment created successfully")
