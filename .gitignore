@@ -4,3 +4,5 @@ node_modules/
 uploads/
 dump.rdb
 production_logs/
+public/
+.DS_Store
