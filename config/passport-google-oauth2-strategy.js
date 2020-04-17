@@ -7,7 +7,7 @@ const env = require('../environment/env')
 passport.use(new googleStrategy({
     clientID: env.google_oauth_client_id,
     clientSecret: env.google_oauth_client_secret,
-    callbackURL: 'http://localhost:8000/users/auth/google/callback'
+    callbackURL: env.google_oauth_callback_url
     }, 
     (accessToken, refreshToken, profile, done)=>{
         User.findOne({email: profile.emails[0].value})

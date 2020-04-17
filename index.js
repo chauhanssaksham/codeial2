@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const expressLayouts = require('express-ejs-layouts')
+const env = require('./environment/env')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const passport = require('passport')
@@ -15,21 +16,22 @@ const flashMW = require('./config/flash')
 
 const PORT = 8000;
 
-
-app.use(sassMiddleware({
-    src: './assets/scss',
-    dest:'./assets/css',
-    debug: true,
-    outputStyle: 'extended',
-    prefix: '/css'
-}));
+if(env.name == 'development'){
+    app.use(sassMiddleware({
+        src: path.join(__dirname, env.asset_path, 'scss'),
+        dest: path.join(__dirname, env.asset_path, 'css'),
+        debug: true,
+        outputStyle: 'extended',
+        prefix: '/css'
+    }));
+}
 
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
 
 //Set Assets
-app.use(express.static('./assets'))
+app.use(express.static(env.asset_path))
 //Make the /uploads path available to the user so that the profile page can load it
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))) 
 
@@ -44,7 +46,7 @@ app.set('views', './views')
 app.use(session({
     name: "Codeial2",
     //TODO: change the secret before deployment
-    secret: 'developmentSecret',
+    secret: env.session_cookie_key,
     resave: true,
     saveUninitialized: true,
     cookie: {
