@@ -1,4 +1,6 @@
 const User = require('../models/user')
+const fs = require('fs')
+const path = require('path')
 
 module.exports.profile = async (req,res)=>{
     try {
@@ -21,7 +23,11 @@ module.exports.update = async (req,res) => {
                 user.name = req.body.name;
                 user.email = req.body.email;
 
-                if (req.file){
+                if (req.file){  //If a file is also uploaded
+                    if(user.avatar && fs.existsSync(path.join(__dirname, '..', user.avatar))){    //User has avatar field, and that file exists in the system
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar))  //Delete the previous image
+                    }
+                    //Save the path of the uploaded file into user.avatar
                     user.avatar = User.avatarPath + '/' + req.file.filename;
                 }
                 user.save();
