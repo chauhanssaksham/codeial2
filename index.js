@@ -10,6 +10,7 @@ const passportGoogle = require('./config/passport-google-oauth2-strategy')
 const MongoStore = require('connect-mongo')(session)
 const db = require('./config/mongoose')
 const path = require('path')
+const logger = require('morgan')
 const sassMiddleware = require('node-sass-middleware')
 const flash = require('connect-flash') //Stores the flash message in the session cookies, which is deleted on page refresh
 const flashMW = require('./config/flash')
@@ -34,6 +35,9 @@ app.use(cookieParser())
 app.use(express.static(env.asset_path))
 //Make the /uploads path available to the user so that the profile page can load it
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))) 
+
+//logger
+app.use(logger(env.morgan.mode, env.morgan.options))
 
 //Layouts Render
 app.use(expressLayouts)
