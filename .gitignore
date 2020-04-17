@@ -6,3 +6,4 @@ dump.rdb
 production_logs/
 public/
 .DS_Store
+*.pem
