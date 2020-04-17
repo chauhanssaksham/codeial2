@@ -29,6 +29,8 @@ app.use(cookieParser())
 
 //Set Assets
 app.use(express.static('./assets'))
+//Make the /uploads path available to the user so that the profile page can load it
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))) 
 
 //Layouts Render
 app.use(expressLayouts)
