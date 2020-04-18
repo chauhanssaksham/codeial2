@@ -41,5 +41,6 @@ module.exports = {
         }
     },
     session_cookie_key: process.env.SESSION_COOKIE_KEY,
-    morgan: morgan_options
+    morgan: morgan_options,
+    jwtSecret: process.env.JWTSecret
 }
