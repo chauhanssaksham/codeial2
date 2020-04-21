@@ -1,4 +1,4 @@
-{
+$(function(){
     let addNewPosttoDom = (post)=>{
         let Container = $('#all-posts');
         let newElement = `<li class="collection-item" id="post-${post._id}">
@@ -49,5 +49,24 @@
         });
     }
 
+    let removePostFromDOM = (postId) =>{
+        $(`#post-${postId}`).remove();
+    }
+
+    $('.delete-post-btn').click(function(e){
+            e.preventDefault();
+            $.ajax({
+                type:'get',
+                url:$(this).attr('href'),
+                success: (data)=>{
+                    console.log(data.data);
+                    removePostFromDOM(data.data);
+                },
+                error: (error)=>{
+                    console.log(error.responseText);
+                }
+            });
+    });
+
     createPost();
-}
+});
