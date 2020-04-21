@@ -24,21 +24,27 @@ class chatEngine{
                 console.log("A user joined, ", data);
             })
         })
-        
-        $('#send-message').click(function(){
+
+       $('#send-message').click(function(){
             let msg = $('#message-input').val();
-    
-            self.socket.emit('sendMessage', {
-                message: msg,
-                user_email: self.userEmail,
-                chatRoom: 'codeial'
-            });
-            console.log(msg);
-            $('#message-input').val('');
-        })
+            if (msg != ''){
+                self.socket.emit('sendMessage', {
+                    message: msg,
+                    userEmail: self.userEmail,
+                    chatRoom: 'codeial'
+                });
+                $('#message-input').val('');
+            }
+        });
 
         self.socket.on('recieve_message', (data)=>{
-            console.log(data);
-        })
+            if(data.userEmail == self.userEmail){
+                let msgElement = `<div class="col s10 right message amber lighten-1">${data.message}</div>`;
+                $('#message-box').append(msgElement);
+            } else {
+                let msgElement = `<div class="col s10 message">${data.message}</div>`;
+                $('#message-box').append(msgElement);
+            }
+        });
     }
 }
