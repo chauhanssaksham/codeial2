@@ -56,7 +56,7 @@ function minifyImages(done){
 
 function clean(done){
     console.log("Cleaning assets...");
-    del.sync('./public/assets');
+    del.sync('./public');
     done();
 }
 
