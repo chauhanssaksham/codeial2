@@ -17,6 +17,13 @@ const sassMiddleware = require('node-sass-middleware')
 const flash = require('connect-flash') //Stores the flash message in the session cookies, which is deleted on page refresh
 const flashMW = require('./config/flash')
 
+//Chat Sockets
+const chatServer = require('http').Server(app)
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer)
+chatServer.listen(5000)
+console.log("Chat server is listening on port 5000")
+
+
 const PORT = 8000;
 
 if(env.name == 'development'){
