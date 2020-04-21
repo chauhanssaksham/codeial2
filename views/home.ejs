@@ -18,7 +18,8 @@
           </div>
     </ul>
 </div>
-<div class="chat-box grey lighten-3">
+<% if (locals.user) { %>
+<div class="chat-box grey lighten-3" id="chat_box_id">
     <div class="relative">
         <div class="message-box row">
             <div class="col s10 message">
@@ -83,3 +84,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.dev.js"></script>
 <script src="/js/chat_engine.js"></script>
+<script>
+    new chatEngine('chat_box_id', '<%= locals.user.email %>')
+</script>
+<% } %>
