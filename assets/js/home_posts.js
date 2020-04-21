@@ -1,4 +1,16 @@
 $(function(){
+    let deletePostBind = function(href){
+        $.ajax({
+            type:'get',
+            url: href,
+            success: (data)=>{
+                removePostFromDOM(data.data);
+            },
+            error: (error)=>{
+                console.log(error.responseText);
+            }
+        });
+}
     let addNewPosttoDom = (post)=>{
         let Container = $('#all-posts');
         let newElement = `<li class="collection-item" id="post-${post._id}">
@@ -30,42 +42,30 @@ $(function(){
     }
     let createPost = ()=>{
         let newPostForm = $('#new-post-form');
-
         newPostForm.submit(e => {
             e.preventDefault();
-
             $.ajax({
                 type:'post',
                 url: '/posts/create',
                 data: newPostForm.serialize(),
                 success: (data)=>{
-                    console.log(data.data);
                     addNewPosttoDom(data.data);
                 },
                 error: (error)=>{
                     console.log(error.responseText);
                 }
-            })
+            });
+            $('#post-input').val('');
         });
     }
 
     let removePostFromDOM = (postId) =>{
         $(`#post-${postId}`).remove();
     }
-
-    $('.delete-post-btn').click(function(e){
+    $(document).on('click','.delete-post-btn', function(e){
             e.preventDefault();
-            $.ajax({
-                type:'get',
-                url:$(this).attr('href'),
-                success: (data)=>{
-                    console.log(data.data);
-                    removePostFromDOM(data.data);
-                },
-                error: (error)=>{
-                    console.log(error.responseText);
-                }
-            });
+            let href = $(this).attr('href');
+            deletePostBind(href);
     });
 
     createPost();
