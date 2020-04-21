@@ -18,6 +18,9 @@ module.exports.chatSockets = (socketServer)=>{
             io.in(data.chatRoom).emit('user_joined', data);
         })
 
+        socket.on('sendMessage', (data)=>{
+            io.in(data.chatRoom).emit('recieve_message', data);
+        })
     })
 
 

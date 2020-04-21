@@ -24,5 +24,21 @@ class chatEngine{
                 console.log("A user joined, ", data);
             })
         })
+        
+        $('#send-message').click(function(){
+            let msg = $('#message-input').val();
+    
+            self.socket.emit('sendMessage', {
+                message: msg,
+                user_email: self.userEmail,
+                chatRoom: 'codeial'
+            });
+            console.log(msg);
+            $('#message-input').val('');
+        })
+
+        self.socket.on('recieve_message', (data)=>{
+            console.log(data);
+        })
     }
 }
