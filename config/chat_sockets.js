@@ -10,6 +10,14 @@ module.exports.chatSockets = (socketServer)=>{
             console.log("Socket disconnected!");
         })
 
+        socket.on('join_room', (data)=>{
+            console.log('Joinin request recieved ', data);
+
+            socket.join(data.chatRoom);     
+
+            io.in(data.chatRoom).emit('user_joined', data);
+        })
+
     })
 
 
