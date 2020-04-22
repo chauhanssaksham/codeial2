@@ -33,6 +33,12 @@ $(function(){
                 <a class="delete-post-btn btn-floating right btn-small waves-effect waves-light red" href="/posts/destroy/${post._id}"><i class="material-icons">delete</i></a>
         </h6>
         <p>${post.content}</p>
+        <p>
+            <a class="grey-text toggle-like" href="/likes?type=post&id=${post._id}">
+                Like
+            </a>
+        <span style="margin-left:10px"><span>0</span> likes</span>
+        </p>
             <form action="/comments/create" method="POST">
                 <div class="row">
                     <div class="input-field col s10 m9">

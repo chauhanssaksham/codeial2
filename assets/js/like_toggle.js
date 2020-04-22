@@ -10,7 +10,7 @@ $(function(){
         }
         element.next().find('span').text(likeCount);
     }
-    $('.toggle-like').on('click', function(e){
+    $(document).on('click', '.toggle-like',function(e){
         let $this = $(this);
         e.preventDefault();
         $.ajax({
