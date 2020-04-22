@@ -25,7 +25,7 @@ class chatEngine{
             })
         })
 
-       $('#send-message').click(function(){
+       $('#send-message-form').on('submit',function(e){
             let msg = $('#message-input').val();
             if (msg != ''){
                 self.socket.emit('sendMessage', {
@@ -35,6 +35,7 @@ class chatEngine{
                 });
                 $('#message-input').val('');
             }
+            e.preventDefault();
         });
 
         self.socket.on('recieve_message', (data)=>{
