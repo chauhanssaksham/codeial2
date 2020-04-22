@@ -38,6 +38,12 @@ $(function(){
                 <div class="col s12">
                     ${comment.content}
                         <a class="btn-floating right btn-small waves-effect waves-light red delete-comment-btn" href="/comments/destroy/${comment._id}"><i class="material-icons">delete</i></a>
+                        <p>
+                            <a class="grey-text toggle-like" href="/likes?type=comment&id=${comment._id}">
+                                Like
+                            </a>
+                            <span style="margin-left:10px"><span>0</span> likes</span>
+                        </p> 
                 </div>
             </div>`;
         container.prepend(newElement);

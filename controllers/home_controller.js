@@ -24,7 +24,6 @@ module.exports.home = async (req,res) => {
                 }
             ]
         }))
-        console.log(posts[0].comments[0].likes)
         let users = await User.find({})
     
         return res.render('home', {
