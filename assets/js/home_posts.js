@@ -10,7 +10,7 @@ $(function(){
                 console.log(error.responseText);
             }
         });
-}
+    }
     let addNewPosttoDom = (post)=>{
         let Container = $('#all-posts');
         let newElement = `<li class="collection-item" id="post-${post._id}">
@@ -50,12 +50,12 @@ $(function(){
                 data: newPostForm.serialize(),
                 success: (data)=>{
                     addNewPosttoDom(data.data);
+                    $('#post-input').val('');
                 },
                 error: (error)=>{
                     console.log(error.responseText);
                 }
             });
-            $('#post-input').val('');
         });
     }
 

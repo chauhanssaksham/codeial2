@@ -9,7 +9,7 @@
         <%= post.content %>                         
     </p>
     <% if (locals.user){ %>
-        <form action="/comments/create" method="POST">
+        <form action="/comments/create" class="comments-input" method="POST">
             <div class="row">
                 <div class="input-field col s10 m9">
                     <input id="comment-input" type="text" name="content" required></input>

@@ -22,6 +22,14 @@ module.exports.create =  async (req,res) => {
                 if(err){console.log('error in creating the queue')}
                 console.log("Job enqueued", job.id)
             })
+
+            if (req.xhr){
+                return res.status(200).json({
+                    data: comment,
+                    message:"Comment created successfully"
+                })
+            }
+
             req.flash('success', "Comment created successfully")
             return res.redirect('/');
         }  
