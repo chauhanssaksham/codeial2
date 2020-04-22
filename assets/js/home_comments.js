@@ -1,13 +1,30 @@
 $(function(){
+    let deleteCommentBind = function(href){
+        $.ajax({
+            type:'get',
+            url: href,
+            success: (data)=>{
+                if(data.success){
+                    removeCommentFromDOM(data.data);
+                }
+                else{
+                    //Error Noty
+                }
+            },
+            error: (error)=>{
+                console.log(error.responseText);
+            }
+        });
+    }
     let addCommentToDOM = (comment)=>{
         let container = $(`#post-comments-${comment.post}`);
-        let newElement = `<div class="row">
+        let newElement = `<div class="row" id="comment-${comment._id}">
                 <div class="col s5">
                     <b>${comment.user.name}</b> 
                 </div>
                 <div class="col s12">
                     ${comment.content}
-                        <a class="btn-floating right btn-small waves-effect waves-light red" href="/comments/destroy/${comment._id}"><i class="material-icons">delete</i></a>
+                        <a class="btn-floating right btn-small waves-effect waves-light red delete-comment-btn" href="/comments/destroy/${comment._id}"><i class="material-icons">delete</i></a>
                 </div>
             </div>`;
         container.prepend(newElement);
@@ -34,5 +51,14 @@ $(function(){
 
         });
     }
+    let removeCommentFromDOM = (commentId) =>{
+        $(`#comment-${commentId}`).remove();
+    }
+    $(document).on('click', '.delete-comment-btn', function(e){
+        e.preventDefault();
+        let href = $(this).attr('href');
+        deleteCommentBind(href);
+    });
+
     createPost();
 });

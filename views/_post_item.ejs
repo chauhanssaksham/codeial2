@@ -27,14 +27,14 @@
     <div class="row">
     <div class="col s11 offset-s1" id="post-comments-<%= post._id %>">
         <% for( comment of post.comments ) { %>
-            <div class="row">
+            <div class="row" id="comment-<%= comment._id %>">
                 <div class="col s5">
                     <b><%= comment.user.name %> </b> 
                 </div>
                 <div class="col s12">
                     <%= comment.content %> 
                     <% if (locals.user && (locals.user.id == comment.user.id || locals.user.id == post.user.id)) { %>
-                        <a class="btn-floating right btn-small waves-effect waves-light red" href="/comments/destroy/<%= comment.id %>"><i class="material-icons">delete</i></a>
+                        <a class="btn-floating right btn-small waves-effect waves-light red delete-comment-btn" href="/comments/destroy/<%= comment.id %>"><i class="material-icons">delete</i></a>
                     <% } %>  
                 </div>
             </div>                 

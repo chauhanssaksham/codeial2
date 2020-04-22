@@ -48,10 +48,24 @@ module.exports.destroy = async (req,res) => {
                 let post_id = comment.post;
                 comment.remove();
                 await Post.findByIdAndUpdate(post_id, {$pull: {comments: req.params.id}})
+                if (req.xhr){
+                    return res.status(200).json({
+                        data: comment._id,
+                        success:true,
+                        message:"Comment Deleted"
+                    })
+                }
                 req.flash('success', "Comment deleted successfully")
                 return res.redirect('back');
             }
         } else {
+            if (req.xhr){
+                return res.status(404).json({
+                    data: comment._id,
+                    success: false,
+                    message:"Unable to locate the comment"
+                })
+            }
             req.flash('error', "Unable to locate the comment")
             return res.redirect('back');
         } 
