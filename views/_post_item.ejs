@@ -8,6 +8,18 @@
     <p>
         <%= post.content %>                         
     </p>
+    <p>
+        <% if (locals.user){ %>
+            <a class="grey-text toggle-like" href="/likes?type=post&id=<%= post.id %>">
+                <% if (post.likes.some(like => (like.user == locals.user.id))){ %>
+                    Unlike
+                <% } else{  %>
+                    Like
+                <% } %>
+            </a>
+        <% } %>
+    <span style="margin-left:10px"><span><%= post.likes.length %></span> likes</span>
+    </p>
     <% if (locals.user){ %>
         <form action="/comments/create" class="comments-input" method="POST">
             <div class="row">
@@ -35,7 +47,19 @@
                     <%= comment.content %> 
                     <% if (locals.user && (locals.user.id == comment.user.id || locals.user.id == post.user.id)) { %>
                         <a class="btn-floating right btn-small waves-effect waves-light red delete-comment-btn" href="/comments/destroy/<%= comment.id %>"><i class="material-icons">delete</i></a>
-                    <% } %>  
+                    <% } %> 
+                    <p>
+                        <% if (locals.user){ %>
+                            <a class="grey-text toggle-like" href="/likes?type=comment&id=<%= comment._id %>">
+                                <% if (comment.likes.some(like => (like.user == locals.user.id))){ %>
+                                    Unlike
+                                <% } else{  %>
+                                    Like
+                                <% } %>
+                            </a>
+                        <% } %>
+                    <span style="margin-left:10px"><span><%= comment.likes.length %></span> likes</span>
+                    </p> 
                 </div>
             </div>                 
         <% } %>

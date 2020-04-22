@@ -43,7 +43,6 @@ $(function(){
         container.prepend(newElement);
     }
     let createComment = ()=>{
-        console.log("achha");
         $('.comments-input').each(function(){
             $(this).on('submit', function(e){
                 e.preventDefault();
