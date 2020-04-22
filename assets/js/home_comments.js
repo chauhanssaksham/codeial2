@@ -6,9 +6,22 @@ $(function(){
             success: (data)=>{
                 if(data.success){
                     removeCommentFromDOM(data.data);
+                    new Noty({
+                        theme: 'relax',
+                        text: data.message,
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
                 }
                 else{
-                    //Error Noty
+                    new Noty({
+                        theme: 'relax',
+                        text: data.message,
+                        type: 'error',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
                 }
             },
             error: (error)=>{
@@ -29,7 +42,7 @@ $(function(){
             </div>`;
         container.prepend(newElement);
     }
-    let createPost = ()=>{
+    let createComment = ()=>{
         console.log("achha");
         $('.comments-input').each(function(){
             $(this).on('submit', function(e){
@@ -42,8 +55,22 @@ $(function(){
                     success:(data)=>{
                         addCommentToDOM(data.data);
                         $(this).find('input[name="content"]').val('');
+                        new Noty({
+                            theme: 'relax',
+                            text: data.message,
+                            type: 'success',
+                            layout: 'topRight',
+                            timeout: 1500
+                        }).show();
                     },
                     error: (error)=>{
+                        new Noty({
+                            theme: 'relax',
+                            text: error.responseText,
+                            type: 'error',
+                            layout: 'topRight',
+                            timeout: 1500
+                        }).show();
                         console.log(error.responseText);
                     }
                 });
@@ -60,5 +87,5 @@ $(function(){
         deleteCommentBind(href);
     });
 
-    createPost();
+    createComment();
 });

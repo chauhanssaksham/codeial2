@@ -4,9 +4,23 @@ $(function(){
             type:'get',
             url: href,
             success: (data)=>{
+                new Noty({
+                    theme: 'relax',
+                    text: data.message,
+                    type: 'success',
+                    layout: 'topRight',
+                    timeout: 1500
+                }).show();
                 removePostFromDOM(data.data);
             },
             error: (error)=>{
+                new Noty({
+                    theme: 'relax',
+                    text: error.responseText,
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 1500
+                }).show();
                 console.log(error.responseText);
             }
         });
@@ -51,8 +65,22 @@ $(function(){
                 success: (data)=>{
                     addNewPosttoDom(data.data);
                     $('#post-input').val('');
+                    new Noty({
+                        theme: 'relax',
+                        text: data.message,
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
                 },
                 error: (error)=>{
+                    new Noty({
+                        theme: 'relax',
+                        text: error.responseText,
+                        type: 'error',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
                     console.log(error.responseText);
                 }
             });
